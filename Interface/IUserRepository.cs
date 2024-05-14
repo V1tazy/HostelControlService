@@ -12,7 +12,7 @@ namespace HostelControlService.Interface
     {
         void Add(UserModel user);
 
-        void Edit(string id);
+        void Edit(UserModel user);
 
         void Remove(string id);
 
