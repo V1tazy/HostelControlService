@@ -56,12 +56,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Interface\IAccessRepository.cs" />
+    <Compile Include="Interface\IOrderRepository.cs" />
     <Compile Include="Interface\IRoomRepository.cs" />
     <Compile Include="Interface\IUserRepository.cs" />
     <Compile Include="Model\AccessModel.cs" />
+    <Compile Include="Model\OrderModel.cs" />
     <Compile Include="Model\RoomModel.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Repositories\AccessRepository.cs" />
+    <Compile Include="Repositories\OrderRepository.cs" />
     <Compile Include="Repositories\RoomRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="userComponents\PasswordBoxControl.xaml.cs">
@@ -74,6 +77,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Utils\ViewModelCommand.cs" />
+    <Compile Include="ViewModel\AdminViewModel.cs" />
+    <Compile Include="ViewModel\AuthViewModel.cs" />
+    <Compile Include="ViewModel\HostelRoomViewModel.cs" />
+    <Compile Include="ViewModel\NavigationViewModel.cs" />
+    <Compile Include="ViewModel\OrderViewModel.cs" />
     <Compile Include="View\AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
     </Compile>
@@ -116,9 +124,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="userComponents\PasswordBoxControl.xaml">
       <SubType>Designer</SubType>
