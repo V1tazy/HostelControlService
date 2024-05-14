@@ -55,18 +55,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <Compile Include="Interface\IAccessRepository.cs" />
+    <Compile Include="Interface\IRoomRepository.cs" />
+    <Compile Include="Interface\IUserRepository.cs" />
+    <Compile Include="Model\AccessModel.cs" />
+    <Compile Include="Model\RoomModel.cs" />
+    <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Repositories\AccessRepository.cs" />
+    <Compile Include="Repositories\RoomRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="userComponents\PasswordBoxControl.xaml.cs">
+      <DependentUpon>PasswordBoxControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\RepositoryBase.cs" />
+    <Compile Include="Utils\ViewModelBase.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Utils\ViewModelCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -93,6 +100,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
+    <Folder Include="View\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="userComponents\PasswordBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

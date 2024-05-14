@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HostelControlService
+namespace HostelControlService.userComponents
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для PasswordBoxControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PasswordBoxControl : UserControl
     {
-        public MainWindow()
+        public PasswordBoxControl()
         {
             InitializeComponent();
         }
