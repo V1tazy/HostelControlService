@@ -74,6 +74,21 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Utils\ViewModelCommand.cs" />
+    <Compile Include="View\AdminView.xaml.cs">
+      <DependentUpon>AdminView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AuthView.xaml.cs">
+      <DependentUpon>AuthView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HostelRoomView.xaml.cs">
+      <DependentUpon>HostelRoomView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NavigationView.xaml.cs">
+      <DependentUpon>NavigationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OrderView.xaml.cs">
+      <DependentUpon>OrderView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -103,10 +118,33 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\" />
-    <Folder Include="View\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="userComponents\PasswordBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Utils\DataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdminView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AuthView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HostelRoomView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NavigationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OrderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

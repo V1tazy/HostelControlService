@@ -15,10 +15,10 @@ namespace HostelControlService.Model
 
         public string Description { get; set; }
 
-        public ImageSource Image {  get; set; }
-
         public int MemberCount { get; set; }
 
-        public int RoomLevel { get; set; }
+        public int RoomLevel { get; set; }  
+
+        public bool RoomStatus { get; set; }
     }
 }

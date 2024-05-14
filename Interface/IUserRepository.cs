@@ -24,6 +24,5 @@ namespace HostelControlService.Interface
 
         IEnumerable<UserModel> GetAll();
 
-        IEnumerable<UserModel> GetByAccessLevel(int accessLevel);
     }
 }
