@@ -18,7 +18,7 @@ namespace HostelControlService.View
     /// <summary>
     /// Логика взаимодействия для HostelRoomView.xaml
     /// </summary>
-    public partial class HostelRoomView : Page
+    public partial class HostelRoomView : UserControl
     {
         public HostelRoomView()
         {

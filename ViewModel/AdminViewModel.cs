@@ -9,5 +9,16 @@ namespace HostelControlService.ViewModel
 {
     internal class AdminViewModel: ViewModelBase
     {
+        #region Field
+        #endregion
+
+        #region Command
+        #endregion
+
+        #region Constructor
+        #endregion
+
+        #region Methods
+        #endregion
     }
 }

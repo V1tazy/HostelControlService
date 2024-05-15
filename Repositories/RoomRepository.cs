@@ -20,15 +20,8 @@ namespace HostelControlService.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "Insert INTO users(Username, Password, Name, LastName, AccessId) " +
-                    "Values(@Username, @Password, @Name, @LastName, @AccessId)";
 
-                command.Parameters.Add("@Username", System.Data.SqlDbType.VarChar).Value = user.Username;
-                command.Parameters.Add("@Password", System.Data.SqlDbType.VarChar).Value = user.Password;
-                command.Parameters.Add("@Name", System.Data.SqlDbType.VarChar).Value = user.Name;
-                command.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar).Value = user.LastName;
-                command.Parameters.Add("@AccessId", System.Data.SqlDbType.Int).Value = user.AccessLevel;
-
+                command.CommandText = "Insert into Room";
 
                 command.ExecuteScalar();
 

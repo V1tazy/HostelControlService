@@ -18,7 +18,7 @@ namespace HostelControlService.View
     /// <summary>
     /// Логика взаимодействия для OrderView.xaml
     /// </summary>
-    public partial class OrderView : Page
+    public partial class OrderView : UserControl
     {
         public OrderView()
         {
