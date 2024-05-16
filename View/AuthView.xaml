@@ -8,7 +8,8 @@
         xmlns:vm ="clr-namespace:HostelControlService.ViewModel"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:component ="clr-namespace:HostelControlService.CustomElement"
-        Title="AuthView" Height="450" Width="800">
+        Title="AuthView" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+        WindowStyle="None" ResizeMode="NoResize">
     <Window.DataContext>
         <vm:AuthViewModel></vm:AuthViewModel>
     </Window.DataContext>
@@ -19,15 +20,17 @@
         <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"></Binding>
     </Window.Visibility>
     <Grid>
+        <DockPanel VerticalAlignment="Top">
+            <component:WindowXromElement DockPanel.Dock ="Top" Background="Gray" Header="Регистрация"></component:WindowXromElement>
+        </DockPanel>
         <Border CornerRadius="20" Background="#9966CC" Height="300" Width="540">
             <Grid>
-                <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" Text="Authorization" VerticalAlignment="Top"  HorizontalAlignment="Center" Margin="30"/>
+                <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" Text="Authorization" VerticalAlignment="Top"  HorizontalAlignment="Center" Margin="10"/>
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBox Width="200" x:Name="TxbLogin" 
-                                 Height="20" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" 
-                                 Margin="5"
-                                 Padding="20 0 0 0"/>
-                    <component:bindingPasswordBox Width="200" Height="20" Margin="5" Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></component:bindingPasswordBox>
+                    <TextBox Width="200" x:Name="TxbLogin" materialDesign:HintAssist.Hint="Username"
+                                 Height="30" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" 
+                                 Margin="5" />
+                    <component:bindingPasswordBox materialDesign:HintAssist.Hint="Password" Width="200" Height="30" Margin="5" Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></component:bindingPasswordBox>
                         <TextBlock Text="{Binding ErrorMessage}"
                                    Foreground="Red"
                                    FontSize="12"

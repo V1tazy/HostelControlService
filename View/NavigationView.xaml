@@ -7,90 +7,62 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:vm ="clr-namespace:HostelControlService.ViewModel"
-        Title="NavigationView" Height="450" Width="800">
+        xmlns:component ="clr-namespace:HostelControlService.CustomElement"
+        Title="NavigationView" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None"> 
     <Window.DataContext>
         <vm:NavigationViewModel/>
     </Window.DataContext>
-    <Grid>
-<materialDesign:Card
- >
-  <TabControl
-    materialDesign:ColorZoneAssist.Mode="Standard"
-    materialDesign:ElevationAssist.Elevation="Dp4"
-    Style="{StaticResource MaterialDesignNavigationRailTabControl}"
-   >
-    <TabItem>
-                    <TabItem.Header>
-                        <Button Command="{Binding AdminCommand}">
-                            <Button.Content>
-                                <StackPanel
-          Width="auto"
-          Height="auto">
-                                    <materialDesign:PackIcon
-            Width="24"
-            Height="24"
-            HorizontalAlignment="Center"
-            Kind="Folder" />
-                                    <TextBlock
-            HorizontalAlignment="Center"
-            Text="All Files" />
-                                </StackPanel>
-                            </Button.Content>
-                        </Button>
-      </TabItem.Header>
-                    <Grid Width="auto">
-                        <ContentControl Content="{Binding CurrentView}"></ContentControl>
-                    </Grid>
-                </TabItem>
-    <TabItem>
-      <TabItem.Header>
-        <StackPanel
-          Width="auto"
-          Height="auto">
-          <materialDesign:PackIcon
-            Width="24"
-            Height="24"
-            HorizontalAlignment="Center"
-            Kind="ClockOutline" />
-          <TextBlock
-            HorizontalAlignment="Center"
-            Text="Recent" />
-        </StackPanel>
-      </TabItem.Header>
-    </TabItem>
-    <TabItem>
-      <TabItem.Header>
-        <StackPanel
-          Width="auto"
-          Height="auto">
-          <materialDesign:PackIcon
-            Width="24"
-            Height="24"
-            HorizontalAlignment="Center"
-            Kind="Images" />
-          <TextBlock
-            HorizontalAlignment="Center"
-            Text="Photos" />
-        </StackPanel>
-      </TabItem.Header>
-    </TabItem>
-    <TabItem>
-      <TabItem.Header>
-        <StackPanel
-          Width="auto"
-          Height="auto">
-          <materialDesign:PackIcon
-            Width="24"
-            Height="24"
-            HorizontalAlignment="Center"
-            Kind="MusicBoxMultiple" />
-          <TextBlock
-            HorizontalAlignment="Center"
-            Text="Sounds" />
-        </StackPanel>
-      </TabItem.Header>
-    </TabItem>
-  </TabControl>
-</materialDesign:Card>
-    </Grid>
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </Window.Resources>
+    
+    <DockPanel>
+        <component:WindowXromElement DockPanel.Dock="Top" Header="Окно навигации" Background="Gray"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Background="#9966cc">
+
+            </Grid>
+            <StackPanel>
+                <Button Background="#9966CC" BorderThickness="0" Height="50" Width="200">
+                    <Button.Content>
+                        <Grid Width="200" Height="40">
+                            <TextBlock Text="{Binding CurrentUser.DisplayName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                        </Grid>
+                    </Button.Content>
+                </Button>
+                <Button Background="#9966CC" Height="50" Width="200" Command="{Binding PlannerCommand}">
+                    <Button.Content>
+                        <Grid Width="200" Height="40">
+                            <TextBlock Text="Комнаты" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Button.Content>
+                </Button>
+                <Button Background="#9966cc" Height="50" Width="200" Command="{Binding OrderCommand}">
+                    <Button.Content>
+                        <Grid Height="40" Width="200">
+                            <TextBlock Text="Заявки" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Button.Content>
+                </Button>
+                <Button Background="#9966CC" Height="50" Width="200" Command="{Binding AdminCommand}">
+                    <Button.Content>
+                        <Grid Height="40" Width="200">
+                            <TextBlock Text="Админ" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Button.Content>
+                    <Button.Visibility>
+                        <Binding Path="IsVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"></Binding>
+                    </Button.Visibility>
+
+                </Button>
+            </StackPanel>
+            <ContentControl Grid.Column="1" Content="{Binding CurrentView}"></ContentControl>
+        </Grid>
+    </DockPanel>
 </Window>

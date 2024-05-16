@@ -82,6 +82,9 @@
     <Compile Include="CustomElement\bindingPasswordBox.xaml.cs">
       <DependentUpon>bindingPasswordBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomElement\WindowXromElement.xaml.cs">
+      <DependentUpon>WindowXromElement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Interface\IAccessRepository.cs" />
     <Compile Include="Interface\IOrderRepository.cs" />
     <Compile Include="Interface\IRoomRepository.cs" />
@@ -156,6 +159,14 @@
   <ItemGroup />
   <ItemGroup>
     <Page Include="CustomElement\bindingPasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomElement\WindowXromElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\WindowXromeStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

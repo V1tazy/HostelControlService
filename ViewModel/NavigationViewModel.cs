@@ -41,7 +41,7 @@ namespace HostelControlService.ViewModel
                 OnPropertyChanged(nameof(IsVisible));
             } 
         }
-        internal UserAccountModel CurrentUser 
+        public UserAccountModel CurrentUser 
         { 
             get => _currentUser;
             set 
@@ -97,16 +97,16 @@ namespace HostelControlService.ViewModel
                 CurrentUser = new UserAccountModel()
                 {
                     Username = user.Username,
-                    DisplayName = user.Name,
+                    DisplayName = $"{user.Name}",
                     AccessLevel = user.AccessLevel
                 };
             }
             else
             {
-               // MessageBox.Show("Ошибка! Пользователь неавторизирован", "Ошибка авторизации", 
-                 //   MessageBoxButton.OK, MessageBoxImage.Error);
+              // MessageBox.Show("Ошибка! Пользователь неавторизирован", "Ошибка авторизации", 
+              // MessageBoxButton.OK, MessageBoxImage.Error);
 
-                //Application.Current.Shutdown();
+               // Application.Current.Shutdown();
 
             }
         }

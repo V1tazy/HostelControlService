@@ -22,7 +22,7 @@ namespace HostelControlService.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "Insert INTO users(Username, Password, Name, LastName, AccessId) " +
+                command.CommandText = "Insert INTO users_table(Username, Password, Name, LastName, AccessId) " +
                     "Values(@Username, @Password, @Name, @LastName, @AccessId)";
 
                 command.Parameters.Add("@Username", System.Data.SqlDbType.VarChar).Value = user.Username;
