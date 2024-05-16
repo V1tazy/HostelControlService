@@ -5,8 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HostelControlService.View"
         mc:Ignorable="d"
+        xmlns:vm ="clr-namespace:HostelControlService.ViewModel"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:component ="clr-namespace:HostelControlService.CustomElement"
         Title="AuthView" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:AuthViewModel></vm:AuthViewModel>
+    </Window.DataContext>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </Window.Resources>
+    <Window.Visibility>
+        <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"></Binding>
+    </Window.Visibility>
     <Grid>
-        
+        <Border CornerRadius="20" Background="#9966CC" Height="300" Width="540">
+            <Grid>
+                <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" Text="Authorization" VerticalAlignment="Top"  HorizontalAlignment="Center" Margin="30"/>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBox Width="200" x:Name="TxbLogin" 
+                                 Height="20" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" 
+                                 Margin="5"
+                                 Padding="20 0 0 0"/>
+                    <component:bindingPasswordBox Width="200" Height="20" Margin="5" Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></component:bindingPasswordBox>
+                        <TextBlock Text="{Binding ErrorMessage}"
+                                   Foreground="Red"
+                                   FontSize="12"
+                                   FontWeight="Medium"
+                                   Margin="0,10, 0, 0"
+                                   TextWrapping="Wrap"/>
+                    <Button Content="Войти" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Background="#ce93d8" 
+                            Style="{StaticResource MaterialDesignRaisedSecondaryDarkButton}" 
+                            ToolTip="Resource name: MaterialDesignRaisedSecondaryDarkButton" Command="{Binding LoginCommand}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

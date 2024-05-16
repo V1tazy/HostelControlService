@@ -1,4 +1,25 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm ="clr-namespace:HostelControlService.ViewModel"
+                    xmlns:view ="clr-namespace:HostelControlService.View">
+
+    <DataTemplate DataType="{x:Type vm:AdminViewModel}">
+        <view:AdminView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:AuthViewModel}">
+        <view:AuthView></view:AuthView>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:NavigationViewModel}">
+        <view:NavigationView></view:NavigationView>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:HostelRoomViewModel}">
+        <view:HostelRoomView></view:HostelRoomView>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:OrderViewModel}">
+        <view:OrderView></view:OrderView>
+    </DataTemplate>
 </ResourceDictionary>

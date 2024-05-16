@@ -5,8 +5,92 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HostelControlService.View"
         mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:vm ="clr-namespace:HostelControlService.ViewModel"
         Title="NavigationView" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:NavigationViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+<materialDesign:Card
+ >
+  <TabControl
+    materialDesign:ColorZoneAssist.Mode="Standard"
+    materialDesign:ElevationAssist.Elevation="Dp4"
+    Style="{StaticResource MaterialDesignNavigationRailTabControl}"
+   >
+    <TabItem>
+                    <TabItem.Header>
+                        <Button Command="{Binding AdminCommand}">
+                            <Button.Content>
+                                <StackPanel
+          Width="auto"
+          Height="auto">
+                                    <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            Kind="Folder" />
+                                    <TextBlock
+            HorizontalAlignment="Center"
+            Text="All Files" />
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+      </TabItem.Header>
+                    <Grid Width="auto">
+                        <ContentControl Content="{Binding CurrentView}"></ContentControl>
+                    </Grid>
+                </TabItem>
+    <TabItem>
+      <TabItem.Header>
+        <StackPanel
+          Width="auto"
+          Height="auto">
+          <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            Kind="ClockOutline" />
+          <TextBlock
+            HorizontalAlignment="Center"
+            Text="Recent" />
+        </StackPanel>
+      </TabItem.Header>
+    </TabItem>
+    <TabItem>
+      <TabItem.Header>
+        <StackPanel
+          Width="auto"
+          Height="auto">
+          <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            Kind="Images" />
+          <TextBlock
+            HorizontalAlignment="Center"
+            Text="Photos" />
+        </StackPanel>
+      </TabItem.Header>
+    </TabItem>
+    <TabItem>
+      <TabItem.Header>
+        <StackPanel
+          Width="auto"
+          Height="auto">
+          <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            Kind="MusicBoxMultiple" />
+          <TextBlock
+            HorizontalAlignment="Center"
+            Text="Sounds" />
+        </StackPanel>
+      </TabItem.Header>
+    </TabItem>
+  </TabControl>
+</materialDesign:Card>
     </Grid>
 </Window>

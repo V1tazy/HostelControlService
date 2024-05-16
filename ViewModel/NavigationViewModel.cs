@@ -103,10 +103,10 @@ namespace HostelControlService.ViewModel
             }
             else
             {
-                MessageBox.Show("Ошибка! Пользователь неавторизирован", "Ошибка авторизации", 
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+               // MessageBox.Show("Ошибка! Пользователь неавторизирован", "Ошибка авторизации", 
+                 //   MessageBoxButton.OK, MessageBoxImage.Error);
 
-                Application.Current.Shutdown();
+                //Application.Current.Shutdown();
 
             }
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HostelControlService.View;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,19 @@ namespace HostelControlService
     /// </summary>
     public partial class App : Application
     {
+        public void ApplicationStart(object sender, StartupEventArgs e)
+        {
+            var authView = new AuthView();
+            authView.Show();
+            authView.IsVisibleChanged += (s, ev) =>
+            {
+                if (authView.IsVisible == false && authView.IsLoaded)
+                {
+                    var navigationView = new NavigationView();
+                    navigationView.Show();
+                    authView.Close();
+                }
+            };
+        }
     }
 }

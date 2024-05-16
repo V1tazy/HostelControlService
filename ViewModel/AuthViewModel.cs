@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Net;
 using System.Threading;
 using System.Security.Principal;
+using System.Security;
 
 namespace HostelControlService.ViewModel
 {
@@ -17,7 +18,7 @@ namespace HostelControlService.ViewModel
     {
         #region Fields
         private string _username;
-        private string _password;
+        private SecureString _password;
         private string _errorMessage;
         private bool _isViewVisible = true;
 
@@ -32,7 +33,7 @@ namespace HostelControlService.ViewModel
                 OnPropertyChanged(nameof(Username));
             } 
         }
-        public string Password 
+        public SecureString Password 
         { 
             get => _password;
             set
@@ -72,7 +73,6 @@ namespace HostelControlService.ViewModel
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
         }
         #endregion
-
         #region Methods
         private void ExecuteLoginCommand(object obj)
         {

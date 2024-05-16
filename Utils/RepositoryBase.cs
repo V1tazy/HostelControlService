@@ -14,7 +14,7 @@ namespace HostelControlService.Utils
 
         public RepositoryBase()
         {
-            _connectionString = "Data Source=localhost;Initial Catalog=HotelControlServiceDB;Integrated Security=True;Trust Server Certificate=True";
+            _connectionString = "Server=(local); Database=HotelControlServiceDB; Integrated Security = True  ";
         }
 
 

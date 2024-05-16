@@ -90,8 +90,8 @@ namespace HostelControlService.Repositories
                 connection.Open();
                 command.Connection = connection;
 
-                command.CommandText = "Delete From users_table Where Id = @Id";
-                command.Parameters.Add("@Id", System.Data.SqlDbType.UniqueIdentifier).Value = userGuid;
+                command.CommandText = "Delete From Room_table Where Id = @Id";
+                command.Parameters.Add("@Id", System.Data.SqlDbType.Int).Value = id;
 
                 command.ExecuteScalar();
             }
