@@ -62,15 +62,16 @@ namespace HostelControlService.Repositories
 
         public IEnumerable<AccessModel> GetAll()
         {
-            var rolesList = new ObservableCollection<AccessModel>();
-            using(var connection = GetConnection())
+            var rolesList = new List<AccessModel>();
+
+            using (var connection = GetConnection())
             using (var command = new SqlCommand())
             {
                 connection.Open();
                 command.Connection = connection;
                 command.CommandText = "Select * From AccessLevel_table";
 
-                using(var reader = command.ExecuteReader())
+                using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -86,5 +87,6 @@ namespace HostelControlService.Repositories
             }
             return rolesList;
         }
+
     }
 }

@@ -4,9 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HostelControlService.View"
+             xmlns:vm ="clr-namespace:HostelControlService.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <vm:HostelRoomViewModel/>
+    </UserControl.DataContext>
     <Grid>
-            
+        <!-- Ваши элементы управления здесь -->
+        <StackPanel>
+            <ComboBox ItemsSource="{Binding HostelRooms}" SelectedItem="{Binding CurrentRoomModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"></ComboBox>
+            <TextBox Text="{Binding CurrentRoomModel.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            <TextBox Text="{Binding CurrentRoomModel.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            <TextBox Text="{Binding CurrentRoomModel.MemberCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            <TextBox Text="{Binding CurrentRoomModel.RoomLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            <CheckBox IsChecked="{Binding CurrentRoomModel.RoomStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Room Status" Margin="5"/>
+            <Button Content="Add" Command="{Binding AddCommand}" Margin="5"/>
+            <Button Content="Edit" Command="{Binding EditCommand}" Margin="5"/>
+            <Button Content="Delete" Command="{Binding DeleteCommand}" Margin="5"/>
+        </StackPanel>
     </Grid>
 </UserControl>

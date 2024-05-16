@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace HostelControlService.ViewModel
@@ -15,60 +16,20 @@ namespace HostelControlService.ViewModel
     internal class HostelRoomViewModel: ViewModelBase
     {
         #region Fields
-        private string _roomName;
-        private string _description;
-        private int _memberCount;
-        private int _roomLevel;
-        private bool _status;
-        private IEnumerable<HostelRoomView> _hostelRooms;
+        private RoomModel _currentroomModel;
+        private IEnumerable<RoomModel> _hostelRooms;
 
-        public string RoomName 
-        { 
-            get => _roomName;
+        public RoomModel CurrentRoomModel
+        {
+            get { return _currentroomModel; }
             set 
             { 
-                _roomName = value;
-                OnPropertyChanged(nameof(RoomName));
-            }
-        }
-        public string Description 
-        { 
-            get => _description;
-            set
-            {
-                _description = value;
-                OnPropertyChanged(nameof(Description));
-            } 
-        }
-        public int MemberCount 
-        { 
-            get => _memberCount;
-            set
-            {
-                _memberCount = value;
-                OnPropertyChanged(nameof(MemberCount));
-            } 
-        }
-        public int RoomLevel 
-        { 
-            get => _roomLevel;
-            set
-            {
-                _roomLevel = value;
-                OnPropertyChanged(nameof(RoomLevel));
-            }
-        }
-        public bool Status 
-        { 
-            get => _status;
-            set
-            {
-                _status = value;
-                OnPropertyChanged(nameof(Status));
+                _currentroomModel = value;
+                OnPropertyChanged(nameof(CurrentRoomModel));
             }
         }
 
-        public IEnumerable<HostelRoomView> HostelRooms 
+        public IEnumerable<RoomModel> HostelRooms 
         { 
             get => _hostelRooms;
             set
@@ -95,9 +56,10 @@ namespace HostelControlService.ViewModel
             roomRepository = new RoomRepository();
             userRepository = new UserRepository();
 
+            HostelRooms = roomRepository.GetAll();
+
             AddCommand = new ViewModelCommand(ExecuteAddCommand, CanExecuteAddCommand);
             EditCommand = new ViewModelCommand(ExecuteEditCommand, CanExecuteEditCommand);
-            DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand, CanExecuteDeleteCommand);
         }
 
         #endregion
@@ -105,19 +67,26 @@ namespace HostelControlService.ViewModel
         #region Methods
         private void ExecuteAddCommand(object obj)
         {
+            bool isRoomExist = roomRepository.GetByName(CurrentRoomModel.Name) != null;
+            if (isRoomExist)
+            {
+                roomRepository.Add(CurrentRoomModel);
 
+                HostelRooms = roomRepository.GetAll();
+            }
+            else
+            {
+                MessageBox.Show("Такая комната уже существует");
+            }
         }
 
         private void ExecuteEditCommand(object obj)
         {
-            throw new NotImplementedException();
+            roomRepository.Edit(CurrentRoomModel);
+            HostelRooms = roomRepository.GetAll();
         }
 
 
-        private void ExecuteDeleteCommand(object obj)
-        {
-            throw new NotImplementedException();
-        }
 
         private bool CanExecuteAddCommand(object obj)
         {
@@ -126,12 +95,12 @@ namespace HostelControlService.ViewModel
 
         private bool CanExecuteEditCommand(object obj)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         private bool CanExecuteDeleteCommand(object obj)
         {
-            throw new NotImplementedException();
+            return true;
         }
         #endregion
     }

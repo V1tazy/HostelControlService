@@ -18,8 +18,4 @@
     <DataTemplate DataType="{x:Type vm:HostelRoomViewModel}">
         <view:HostelRoomView></view:HostelRoomView>
     </DataTemplate>
-
-    <DataTemplate DataType="{x:Type vm:OrderViewModel}">
-        <view:OrderView></view:OrderView>
-    </DataTemplate>
 </ResourceDictionary>

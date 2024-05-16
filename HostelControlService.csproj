@@ -86,16 +86,13 @@
       <DependentUpon>WindowXromElement.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interface\IAccessRepository.cs" />
-    <Compile Include="Interface\IOrderRepository.cs" />
     <Compile Include="Interface\IRoomRepository.cs" />
     <Compile Include="Interface\IUserRepository.cs" />
     <Compile Include="Model\AccessModel.cs" />
-    <Compile Include="Model\OrderModel.cs" />
     <Compile Include="Model\RoomModel.cs" />
     <Compile Include="Model\UserAccountModel.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Repositories\AccessRepository.cs" />
-    <Compile Include="Repositories\OrderRepository.cs" />
     <Compile Include="Repositories\RoomRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="userComponents\PasswordBoxControl.xaml.cs">
@@ -112,7 +109,7 @@
     <Compile Include="ViewModel\AuthViewModel.cs" />
     <Compile Include="ViewModel\HostelRoomViewModel.cs" />
     <Compile Include="ViewModel\NavigationViewModel.cs" />
-    <Compile Include="ViewModel\OrderViewModel.cs" />
+    <Compile Include="ViewModel\ShowRoomViewModel.cs" />
     <Compile Include="View\AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
     </Compile>
@@ -124,9 +121,6 @@
     </Compile>
     <Compile Include="View\NavigationView.xaml.cs">
       <DependentUpon>NavigationView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\OrderView.xaml.cs">
-      <DependentUpon>OrderView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -191,10 +185,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\NavigationView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\OrderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

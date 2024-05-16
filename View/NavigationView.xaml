@@ -36,17 +36,10 @@
                         </Grid>
                     </Button.Content>
                 </Button>
-                <Button Background="#9966CC" Height="50" Width="200" Command="{Binding PlannerCommand}">
+                <Button Background="#9966CC" Height="50" Width="200" Command="{Binding HostelRoomCommand}">
                     <Button.Content>
                         <Grid Width="200" Height="40">
                             <TextBlock Text="Комнаты" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-                    </Button.Content>
-                </Button>
-                <Button Background="#9966cc" Height="50" Width="200" Command="{Binding OrderCommand}">
-                    <Button.Content>
-                        <Grid Height="40" Width="200">
-                            <TextBlock Text="Заявки" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>
                     </Button.Content>
                 </Button>

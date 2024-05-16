@@ -78,7 +78,6 @@ namespace HostelControlService.ViewModel
 
             AdminCommand = new ViewModelCommand(Admin, CanExecuteAdminCommand);
             HostelRoomCommand = new ViewModelCommand(Hostel);
-            OrderCommand = new ViewModelCommand(Order);
         }
 
         #endregion
@@ -86,7 +85,6 @@ namespace HostelControlService.ViewModel
         #region Methods
         private void Admin(object obj) => CurrentView = new AdminView();
         private void Hostel(object obj) => CurrentView = new HostelRoomView();
-        private void Order(object obj) => CurrentView = new OrderView();
 
         private void LoadCurrentUser() 
         {

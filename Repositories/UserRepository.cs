@@ -29,7 +29,7 @@ namespace HostelControlService.Repositories
                 command.Parameters.Add("@Password", System.Data.SqlDbType.VarChar).Value = user.Password;
                 command.Parameters.Add("@Name", System.Data.SqlDbType.VarChar).Value = user.Name;
                 command.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar).Value = user.LastName;
-                command.Parameters.Add("@AccessId", System.Data.SqlDbType.Int).Value = user.AccessLevel;
+                command.Parameters.Add("@AccessId", System.Data.SqlDbType.Int).Value = 1;
 
 
                 command.ExecuteScalar();
@@ -72,7 +72,7 @@ namespace HostelControlService.Repositories
                 connection.Open();
 
                 command.Connection = connection;
-                command.CommandText = "Select * From user_table";
+                command.CommandText = "Select * From users_table";
 
                 using(var reader = command.ExecuteReader())
                 {
@@ -106,7 +106,7 @@ namespace HostelControlService.Repositories
                 connection.Open();
 
                 command.Connection = connection;
-                command.CommandText = "Select * From user_table where AccessId = @AccessId";
+                command.CommandText = "Select * From users_table where AccessId = @AccessId";
 
                 command.Parameters.Add("@AccessId", System.Data.SqlDbType.Int).Value = accessLevel;
 
@@ -235,7 +235,7 @@ namespace HostelControlService.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = @" UPDATE [User] SET Name = @Name, LastName = @LastName, AccessId = @AccessId
+                command.CommandText = @" UPDATE users_table SET Name = @Name, LastName = @LastName, AccessId = @AccessId
                 WHERE Id = @Id AND Username = @Username";
                 command.Parameters.AddWithValue("@Id", EditedUser.Id);
                 command.Parameters.AddWithValue("@Username", EditedUser.Username);

@@ -4,9 +4,58 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HostelControlService.View"
+             xmlns:vm ="clr-namespace:HostelControlService.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <vm:AdminViewModel/>
+    </UserControl.DataContext>
+
     <Grid>
-        
+        <Border CornerRadius="10" Background="#9966cc"  Height="400" Width="500">
+            <Grid>
+                <StackPanel VerticalAlignment="Center" Width="400">
+                    <ComboBox ItemsSource="{Binding UserModels}" SelectedItem="{Binding CurrentUser, Mode=TwoWay}" DisplayMemberPath="Username" Width="200"></ComboBox>
+
+                    <TextBlock Text="Логин пользователя:" HorizontalAlignment="Center" Width="200"></TextBlock>
+                    <TextBox Margin="5" HorizontalAlignment="Center" Width="200" Text="{Binding CurrentUser.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="Пароль:" HorizontalAlignment="Center" Width="200"></TextBlock>
+                    <TextBox Margin="5" HorizontalAlignment="Center" Width="200" Text="{Binding CurrentUser.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="Имя пользователя:" HorizontalAlignment="Center" Width="200"></TextBlock>
+                    <TextBox Margin="5" HorizontalAlignment="Center" Width="200" Text="{Binding CurrentUser.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="Фамилия пользователя:" HorizontalAlignment="Center" Width="200"></TextBlock>
+                    <TextBox Margin="5" HorizontalAlignment="Center" Width="200" Text="{Binding CurrentUser.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="Уровень прав:" HorizontalAlignment="Center" Width="200"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5">
+                    <Button Width="145" Margin="5" Content="Редактировать" Command="{Binding AdminEditCommand}">
+                        <Button.Effect>
+                            <DropShadowEffect BlurRadius="15" ShadowDepth="0"/>
+                        </Button.Effect>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="10"/>
+                                <Setter Property="Padding" Value="10,2,10,3"/>
+                                <Setter Property="Background" Value="White"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button Width="100" Margin="5" Content="Удалить" Command="{Binding AdminDeleteCommand}">
+                        <Button.Effect>
+                            <DropShadowEffect BlurRadius="15" ShadowDepth="0"/>
+                        </Button.Effect>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="10"/>
+                                <Setter Property="Padding" Value="10,2,10,3"/>
+                                <Setter Property="Background" Value="White"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button Content="Добавить" Background="White" Command="{Binding AdminAddCommand}"></Button>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

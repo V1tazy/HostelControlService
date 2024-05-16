@@ -14,33 +14,15 @@ namespace HostelControlService.ViewModel
     internal class AdminViewModel : ViewModelBase
     {
         #region Field
-        private string _username;
-        private string _password;
-        private string _name;
-        private string _lastName;
-        private int _accessId;
+        private UserRepository userRepository = new UserRepository();
+        private AccessRepository accessRepository = new AccessRepository();
 
-        private string _roleName;
-
-        private AccessModel _currentRole;
+        private IEnumerable<UserModel> userModels;
+        private IEnumerable<AccessModel> accessModels;
         private UserModel _currentUser;
+        #endregion
 
-        private IEnumerable<AccessModel> listRoles;
-        private IEnumerable<UserModel> listUsers;
 
-        private IUserRepository userRepository;
-        private IAccessRepository accessRepository;
-
-        public AccessModel CurrentRole
-        {
-            get => _currentRole;
-            set
-            {
-                _currentRole = value;
-                OnPropertyChanged(nameof(CurrentRole));
-            }
-        }
-        
         public UserModel CurrentUser
         {
             get => _currentUser;
@@ -50,92 +32,67 @@ namespace HostelControlService.ViewModel
                 OnPropertyChanged(nameof(CurrentUser));
             }
         }
-        public string RoleName
+        public IEnumerable<UserModel> UserModels
         {
-            get => _roleName;
+            get { return userModels; }
             set
             {
-                RoleName = value;
-                OnPropertyChanged(nameof(RoleName));
-            }
-        }
-        public string Username
-        {
-            get => _username;
-            set
-            {
-                _username = value;
-                OnPropertyChanged(nameof(Username));
-            }
-        }
-        public string Password
-        {
-            get => _password;
-            set
-            {
-                _password = value;
-                OnPropertyChanged(nameof(Password));
-            }
-        }
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                _name = value;
-                OnPropertyChanged(nameof(Name));
-            }
-        }
-        public string LastName
-        {
-            get => _lastName;
-            set
-            {
-                _lastName = value;
-                OnPropertyChanged(nameof(LastName));
-            }
-        }
-        public int AccessId
-        {
-            get => _accessId;
-            set
-            {
-                _accessId = value;
-                OnPropertyChanged(nameof(AccessId));
+                userModels = value;
+                OnPropertyChanged(nameof(UserModels));
             }
         }
 
-        internal IEnumerable<AccessModel> ListRoles
-        {
-            get => listRoles;
+        internal IEnumerable<AccessModel> AccessModels 
+        { 
+            get => accessModels;
             set
             {
-                listRoles = value;
-                OnPropertyChanged(nameof(ListRoles));
+                accessModels = value;
+                OnPropertyChanged(nameof(AccessModels));
             }
         }
-        internal IEnumerable<UserModel> ListUsers
-        {
-            get => listUsers;
-            set
-            {
-                listUsers = value;
-                OnPropertyChanged(nameof(ListUsers));
-            }
-        }
+
+        #region Commands
+        public ICommand AdminAddCommand { get;}
+        public ICommand AdminEditCommand { get; }
+        public ICommand AdminDeleteCommand { get; }
         #endregion
 
-        #region Command
-        public ICommand AddUserCommand { get; }
-        public ICommand EditUserCommand { get; }
-        public ICommand DeleteUserCommand { get; }
-        public ICommand RefreshUserCommand { get; }
-        public ICommand ClearUserCommand { get; }
+        #region Edit
+        private bool CanExecuteEditCommand(object obj)
+        {
+            if (CurrentUser != null && CurrentUser.Username != "admin")
+            {
+                return true;
+            }
+            return false;
+        }
 
-        public ICommand AddRoleCommand { get; }
-        public ICommand EditRoleCommand { get; }
-        public ICommand DeleteRoleCommand { get; }
+        private void ExecuteEditCommand(object obj)
+        {
+            userRepository.Edit(CurrentUser);
+            UserModels = userRepository.GetAll();
+        }
+        private bool CanExecutedDeletedCommand(object obj)
+        {
+            if (CurrentUser != null && CurrentUser.Username != "admin")
+            {
+                return true;
+            }
+            return false;
+        }
 
+        private void ExecuteDeleteCommand(object obj)
+        {
+            userRepository.Remove(CurrentUser.Id);
+            UserModels = userRepository.GetAll();
+        }
+
+        private void ExecuteAddCommand(object obj)
+        {
+            userRepository.Add(CurrentUser);
+            UserModels = userRepository.GetAll();
+        }
         #endregion
 
         #region Constructor
@@ -144,115 +101,18 @@ namespace HostelControlService.ViewModel
             userRepository = new UserRepository();
             accessRepository = new AccessRepository();
 
-            ListUsers = userRepository.GetAll();
-            ListRoles = accessRepository.GetAll();
 
-            AddUserCommand = new ViewModelCommand(ExecuteUserAddCommand, CanExecuteUserAddCommand);
-            EditUserCommand = new ViewModelCommand(ExecuteUserEditCommand, CanExecuteUserGroupCommand);
-            DeleteUserCommand = new ViewModelCommand(ExecuteUserDeleteCommand, CanExecuteUserGroupCommand);
-            RefreshUserCommand = new ViewModelCommand(ExecuteUserRefreshCommand, CanExecuteUserGroupCommand);
-            ClearUserCommand = new ViewModelCommand(ExecuteUserClearCommand, CanExecuteUserGroupCommand);
+            UserModels = userRepository.GetAll();
+            accessModels = accessRepository.GetAll();
 
-            AddRoleCommand = new ViewModelCommand(ExecuteAddRoleCommand, CanExecuteRoleAddCommand);
-            EditRoleCommand = new ViewModelCommand(ExecuteEditRoleCommand, CanExecuteRoleGroupCommand);
-
-        }
-        #endregion
-
-        #region Methods
-        private void ExecuteUserAddCommand(object obj)
-        {
-            bool isUserExist = userRepository.GetByName(Username) == null;
-
-            if (isUserExist)
-            {
-                userRepository.Add(new UserModel()
-                {
-                    Username = Username,
-                    Password = Password,
-                    Name = Name,
-                    LastName = LastName,
-                    AccessLevel = AccessId
-                });
-            }
+            AdminEditCommand = new ViewModelCommand(ExecuteEditCommand, CanExecuteEditCommand);
+            AdminDeleteCommand = new ViewModelCommand(ExecuteDeleteCommand, CanExecutedDeletedCommand);
+            AdminAddCommand = new ViewModelCommand(ExecuteAddCommand, CanExecuteAddCommand);
         }
 
-        private void ExecuteUserEditCommand(object obj)
+        private bool CanExecuteAddCommand(object obj)
         {
-            userRepository.Edit(CurrentUser);
-            ListUsers = userRepository.GetAll();
-        }
-
-        private void ExecuteUserDeleteCommand(object obj)
-        {
-            userRepository.Remove(CurrentUser.Id);
-        }
-
-        private void ExecuteUserRefreshCommand(object obj)
-        {
-            ListUsers = userRepository.GetAll();
-            ListRoles = accessRepository.GetAll();
-        }
-
-        private void ExecuteUserClearCommand(object obj)
-        {
-            Username = null;
-            Password = null;
-            Name = null;
-            LastName = null;
-            AccessId = 0;
-        }
-
-        private void ExecuteAddRoleCommand(object obj) 
-        {
-            
-        }
-
-        private void ExecuteEditRoleCommand(object obj)
-        {
-
-        }
-
-        private void ExecuteDeleteRoleCommand(object obj)
-        {
-
-        }
-
-        private void ExecuteRefreshRoleCommand(object obj)
-        {
-
-        }
-
-        private void ExecuteClearRoleCommand(object obj)
-        {
-
-        }
-
-        private bool CanExecuteUserAddCommand(object obj)
-        {
-            if(Username.Length < 5 || Password.Length < 5) 
-                return false;
-
             return true;
-        }
-
-        private bool CanExecuteUserGroupCommand(object obj)
-        {
-            if (Username != "admin" && CurrentUser != null)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        private bool CanExecuteRoleAddCommand(object obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        private bool CanExecuteRoleGroupCommand(object obj)
-        {
-            throw new NotImplementedException();
         }
         #endregion
     }
