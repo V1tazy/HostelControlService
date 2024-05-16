@@ -105,6 +105,7 @@ namespace HostelControlService.ViewModel
         #region Methods
         private void ExecuteAddCommand(object obj)
         {
+
         }
 
         private void ExecuteEditCommand(object obj)

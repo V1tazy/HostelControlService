@@ -21,8 +21,14 @@ namespace HostelControlService.Repositories
                 connection.Open();
                 command.Connection = connection;
 
-                command.CommandText = "Insert into Room";
+                command.CommandText = "Insert into Room(Name, Description, RoomLevel, Status, ImageSource) " +
+                    "Values (@Name, @Description, @RoomLevel, @Status, @ImageSource)";
 
+                command.Parameters.Add("@Name", System.Data.SqlDbType.VarChar).Value = room.Name;
+                command.Parameters.Add("@Description", System.Data.SqlDbType.VarChar).Value = room.Description;
+                command.Parameters.Add("@RoomLevel", System.Data.SqlDbType.Int).Value = room.RoomLevel;
+                command.Parameters.Add("@Status", System.Data.SqlDbType.Bit).Value = room.RoomStatus;
+                command.Parameters.Add("@ImageSource", System.Data.SqlDbType.VarChar).Value = "work";
                 command.ExecuteScalar();
 
                 MessageBox.Show("Успешно");

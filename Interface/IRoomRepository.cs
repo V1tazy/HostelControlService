@@ -18,6 +18,7 @@ namespace HostelControlService.Interface
 
         RoomModel GetById(string id);
 
+        IEnumerable<RoomModel> GetByUsername(string username);
         IEnumerable<RoomModel> GetAll();
 
         IEnumerable<RoomModel> GetByRoomLevel(int roomLevel);
